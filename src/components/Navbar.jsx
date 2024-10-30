@@ -1,47 +1,56 @@
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const { setShowSearch } = useContext(ShopContext);
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       {/*tao logo */}
-      <img src={assets.logo} className="w-36" alt="" />
+      <Link to="/">
+        <img src={assets.logo} className="w-36" alt="" />
+      </Link>
 
       {/*thanh navbar */}
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
+      <ul className="hidden gap-5 text-sm text-gray-700 sm:flex">
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p>HOME</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700" />
+          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden " />
         </NavLink>
         <NavLink to="/collection" className="flex flex-col items-center gap-1">
           <p>COLLECTION</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700" />
+          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
         <NavLink to="/about" className="flex flex-col items-center gap-1">
           <p>ABOUT</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700" />
+          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
         <NavLink to="/contact" className="flex flex-col items-center gap-1">
           <p>CONTACT</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700" />
+          <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
       </ul>
       {/*cac thanh tim kiem, user va gio hang*/}
       <div className="flex items-center gap-6">
-        <img src={assets.search_icon} alt="" className="w-5 cursor-pointer" />
+        <img
+          onClick={() => setShowSearch(true)}
+          src={assets.search_icon}
+          alt=""
+          className="w-5 cursor-pointer"
+        />
 
-        <div className="group relative">
+        <div className="relative group">
           <img
             src={assets.profile_icon}
             alt=""
             className="w-5 cursor-pointer"
           />
           {/*khi hover vao user hien ra */}
-          <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
-            <div className="flex flex-col gap-2  w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
+          <div className="absolute right-0 hidden pt-4 group-hover:block dropdown-menu">
+            <div className="flex flex-col gap-2 px-5 py-3 text-gray-500 rounded w-36 bg-slate-100">
               <p className="cursor-pointer hover:text-black">My Profile</p>
               <p className="cursor-pointer hover:text-black">Orders</p>
               <p className="cursor-pointer hover:text-black">Logout</p>
