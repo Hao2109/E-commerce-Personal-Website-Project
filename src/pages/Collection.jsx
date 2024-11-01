@@ -3,6 +3,8 @@ import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import Title from "../components/Title";
 import ProductIem from "../components/ProductIem";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Collection = () => {
   const { products, search, showSearch } = useContext(ShopContext);
@@ -18,6 +20,13 @@ const Collection = () => {
       setCategory((prev) => [...prev, e.target.value]);
     }
   };
+  useEffect(() => {
+    AOS.init({
+      offset: 200,
+      duration: 1000, // Thời gian chuyển động (ms)
+      easing: "ease-in-sine", // Hiệu ứng chỉ chạy một lần khi cuộn vào
+    });
+  }, []);
   useEffect(() => {
     setFilterProducts(products);
   }, []);
@@ -72,7 +81,10 @@ const Collection = () => {
     sortProduct();
   }, [sortType]);
   return (
-    <div className="flex flex-col gap-1 pt-10 border-t sm:flex-row sm:gap-10">
+    <div
+      className="flex flex-col gap-1 pt-10 border-t sm:flex-row sm:gap-10"
+      data-aos="fade-right"
+    >
       {/*Filter Option */}
       <div className="min-w-60">
         <p
@@ -172,7 +184,7 @@ const Collection = () => {
             onChange={(e) => setSortType(e.target.value)}
             name=""
             id=""
-            className="px-2 text-sm border-2 border-gray-300"
+            className="px-2 text-sm border border-gray-300 "
           >
             <option value="relavent">Sort by: Relavent </option>
             <option value="low-high">Sort by: Low to High </option>

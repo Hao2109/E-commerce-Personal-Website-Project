@@ -1,7 +1,9 @@
 import React from "react";
 
 const NewsletterBox = () => {
-  const onSubmitHandler = () => {};
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+  };
   return (
     <div className="text-center ">
       <p className="text-2xl font-medium text-gray-800">
@@ -14,7 +16,7 @@ const NewsletterBox = () => {
       <form
         onSubmit={onSubmitHandler}
         action=""
-        className="flex items-center w-full gap-3 pl-3 mx-auto border sm:w-1/2"
+        className="flex items-center w-full gap-3 pl-3 mx-auto mt-3 border sm:w-1/2"
       >
         <input
           className="w-full outline-none sm:flex-1"

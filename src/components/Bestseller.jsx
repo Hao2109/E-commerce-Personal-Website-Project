@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
 import ProductIem from "./ProductIem";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Bestseller = () => {
   const { products } = useContext(ShopContext);
@@ -10,6 +12,7 @@ const Bestseller = () => {
     const bestProduct = products.filter((item) => item.bestseller);
     setBestSeller(bestProduct.slice(0, 5));
   }, []);
+
   return (
     <div className="my-10 ">
       <div className="py-8 text-3xl text-center">

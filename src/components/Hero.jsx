@@ -1,9 +1,14 @@
 import { assets } from "../assets/assets";
+
+import { useEffect } from "react";
 const Hero = () => {
   return (
-    <div className="flex flex-col border border-gray-400 sm:flex-row">
+    <section className="flex flex-col border border-gray-400 sm:flex-row">
       {/*Hero Left Side */}
-      <div className="flex items-center justify-center w-full py-10 sm:w-1/2 sm:py-0">
+      <div
+        className="flex items-center justify-center w-full py-10 sm:w-1/2 sm:py-0"
+        data-aos="fade-right"
+      >
         <div className="text-[#414141]">
           <div className="flex items-center gap-2">
             <p className="w-8 md:w-11 h-[2px] bg-[#414141]"></p>
@@ -19,8 +24,13 @@ const Hero = () => {
         </div>
       </div>
       {/*Hero Right Side */}
-      <img src={assets.hero_img} alt="" className="w-full sm:w-1/2" />
-    </div>
+      <img
+        src={assets.hero_img}
+        alt=""
+        className="w-full sm:w-1/2"
+        data-aos="fade-right"
+      />
+    </section>
   );
 };
 

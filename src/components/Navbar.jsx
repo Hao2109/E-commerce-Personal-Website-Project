@@ -1,14 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Thời gian chuyển động (ms)
+      once: true, // Hiệu ứng chỉ chạy một lần khi cuộn vào
+    });
+  }, []);
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium">
+    <div
+      className="flex items-center justify-between py-5 font-medium"
+      data-aos="fade-down"
+    >
       {/*tao logo */}
       <Link to="/">
         <img src={assets.logo} className="w-36" alt="" />
@@ -43,11 +53,14 @@ const Navbar = () => {
         />
 
         <div className="relative group">
-          <img
-            src={assets.profile_icon}
-            alt=""
-            className="w-5 cursor-pointer"
-          />
+          <Link to="/login">
+            <img
+              src={assets.profile_icon}
+              alt=""
+              className="w-5 cursor-pointer"
+            />
+          </Link>
+
           {/*khi hover vao user hien ra */}
           <div className="absolute right-0 hidden pt-4 group-hover:block dropdown-menu">
             <div className="flex flex-col gap-2 px-5 py-3 text-gray-500 rounded w-36 bg-slate-100">
@@ -61,7 +74,7 @@ const Navbar = () => {
         <Link to="/cart" className="relative">
           <img src={assets.cart_icon} alt="" className="w-5 min-w-5" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-            10
+            {getCartCount()}
           </p>
         </Link>
         <img
